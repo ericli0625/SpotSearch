@@ -135,7 +135,7 @@
       <div class="row">
         {% for name in contents %}
         <div class="col-xs-6 col-lg-2" id="panel_body_style" >
-        <a class="btn btn-default" href="{% url 'spots.views.citydetails' title name.city %}" role="button">{{name.city}}</a>
+        <a class="btn btn-default" href="{% url 'spots.views.citydetails' title name.city %}#01" role="button">{{name.city}}</a>
         </div>
         {% endfor %} 
       </div>
