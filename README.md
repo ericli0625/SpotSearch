@@ -6,4 +6,4 @@ I use Python+Djaongo to build the web site, If you have any question ,plz free t
 
 E-mail:ericli0625@gmail.com
 
-Web site:https://secure-scrubland-7620.herokuapp.com/
+Web site:http://secure-scrubland-7620.herokuapp.com/
