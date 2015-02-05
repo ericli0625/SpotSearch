@@ -122,13 +122,13 @@ function attachSecretMessage(marker, name,category,lat,lng) {
             <div id="navbar" class="navbar-collapse collapse">
               <ul class="nav navbar-nav">
                 <li><a href="/">Home</a></li>
-                <li><a href="{% url 'spots.views.datainfo' 'About' %}">About</a></li>
-                <li><a href="{% url 'spots.views.datainfo' 'Contact' %}">Contact</a></li>
+                <li><a href="{% url 'spots.views.datainfo' 'About' %}#01">About</a></li>
+                <li><a href="{% url 'spots.views.datainfo' 'Contact' %}#01">Contact</a></li>
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">List of cities<span class="caret"></span></a>
                   <ul class="dropdown-menu" role="menu">
 {% for city_name in cities %}
-<li > <a href="{% url 'spots.views.choosecity' city_name %}" target="_top">{{city_name}}</a> </li>
+<li > <a href="{% url 'spots.views.choosecity' city_name %}#01" target="_top">{{city_name}}</a> </li>
 {% endfor %}
                   </ul>
                 </li>
@@ -201,7 +201,7 @@ function attachSecretMessage(marker, name,category,lat,lng) {
 
 
 <div class="container">
-
+<div id="01"></div>
     <div class="panel panel-info" align="center">
     <div class="panel-heading">
         <h3 class="panel-title">{{title}}{{title_zone}}</h3>
