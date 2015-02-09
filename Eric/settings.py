@@ -93,11 +93,11 @@ USE_TZ = True
 
 STATIC_URL = '/Spots/static/'
 
-
-#STATIC_ROOT = 'staticfiles' #????
-#STATICFILES_DIRS = (
-#    os.path.join(BASE_DIR, "static"),
-#)
+#deploy
+STATIC_ROOT = 'staticfiles'         
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, "static"),
+)
 
 
 # template -- web site
