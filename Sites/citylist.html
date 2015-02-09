@@ -47,13 +47,8 @@
             <div id="navbar" class="navbar-collapse collapse">
               <ul class="nav navbar-nav">
                 <li><a href="/">Home</a></li>
-                {%if datainfo == "About" %}
-                <li class="active"><a href="{% url 'spots.views.datainfo' 'About' %}#01">About</a></li>
-                <li><a href="{% url 'spots.views.datainfo' 'Contact' %}#01">Contact</a></li>
-                {%else%}
                 <li><a href="{% url 'spots.views.datainfo' 'About' %}#01">About</a></li>
-                <li class="active"><a href="{% url 'spots.views.datainfo' 'Contact' %}#01">Contact</a></li>
-                {%endif%}
+                <li><a href="{% url 'spots.views.datainfo' 'Contact' %}#01">Contact</a></li>
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">List of cities<span class="caret"></span></a>
                   <ul class="dropdown-menu" role="menu">
@@ -80,20 +75,19 @@
 
 {% include 'CarouselSpots.html' %}
 
-<div class="container">
+<div class="container" align="center">
 <div id="01"></div>
 <div class="panel panel-info">
     <div class="panel-heading">
-    <h3 class="panel-title">{{datainfo}}</h3>
+    <h3 class="panel-title">{{title}}</h3>
     </div>
     <div class="panel-body" id="panel_body_style" >
       <div class="row">
-        {%if datainfo == "About" %}
-          <P><H4>本網站提供臺灣地區的旅遊景點.........</H4></P>
-        {%else%}
-          <P><H4>Developer:HsunChe Li</H4></P>
-          <P><H4>E-mail:<a href="mailto:ericli0625@gmail.com">ericli0625@gmail.com</a></H4></P>
-        {%endif%}
+        {% for name in contents %}
+        <div class="col-xs-6 col-lg-2" id="panel_body_style" >
+        <a class="btn btn-default" href="{% url 'spots.views.citydetails' title name.city %}#01" role="button">{{name.city}}</a>
+        </div>
+        {% endfor %} 
       </div>
     </div>
 </div>
@@ -101,6 +95,9 @@
 <ul class="pager">
     <li><a href="/">Previous</a></li>
 </ul>
+</div> <!-- /container -->
+
+<div class="container">
 
 <!-- FOOTER -->
 <footer>

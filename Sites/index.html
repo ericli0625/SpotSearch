@@ -5,11 +5,11 @@
 <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
     <title>Travel Spots</title>
     <!-- Bootstrap -->
-    <link rel="stylesheet" href="{{ STATIC_ROOT }}css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap.min.css">
     <!-- Bootstrap theme -->
-    <link rel="stylesheet" href="{{ STATIC_ROOT }}css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap-theme.min.css">
 
-<link href="{{ STATIC_ROOT }}css/carousel.css" rel="stylesheet">
+<link href="{{ STATIC_URL }}css/carousel.css" rel="stylesheet">
 
 </head>
 
@@ -88,6 +88,9 @@
     {% endfor %} 
 
     </div> 
+</div> <!-- /container -->
+
+<div class="container" >
 
 <!-- FOOTER -->
 <footer>
@@ -101,7 +104,7 @@
 <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
 
 <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
-<script src="{{ STATIC_ROOT }}js/bootstrap.min.js"></script>
+<script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
 
 </body>
 </html>

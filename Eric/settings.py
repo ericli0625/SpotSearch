@@ -57,25 +57,22 @@ WSGI_APPLICATION = 'Eric.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
 
-
-import dj_database_url
-DATABASES = {'default': dj_database_url.config(default='postgres://qiivcofeurbrrq:ZrHRbAnPUaJTKo3lhyGCEKMMlI@ec2-54-83-204-104.compute-1.amazonaws.com:5432/d5sloc17vjd4sd')}
-
+#import dj_database_url
+#DATABASES = {'default': dj_database_url.config(default='postgres://qiivcofeurbrrq:ZrHRbAnPUaJTKo3lhyGCEKMMlI@ec2-54-83-204-104.compute-1.amazonaws.com:5432/d5sloc17vjd4sd')}
 
 
-#DATABASES = {
-#    'default': {
-#        #'ENGINE': 'django.db.backends.mysql',
-#        'ENGINE': 'django.db.backends.sqlite3',   
-#        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#        'NAME': 'travel_db',
-#        'USER': 'root',                      
-#        'PASSWORD': 'jmp275utn',                  
-#        'HOST': '',                      
-#        'PORT': '',                      
-#    }
-#}
-
+DATABASES = {
+    'default': {
+        #'ENGINE': 'django.db.backends.mysql',
+        'ENGINE': 'django.db.backends.sqlite3',   
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME': 'travel_db',
+        'USER': 'root',                      
+        'PASSWORD': 'jmp275utn',                  
+        'HOST': '',                      
+        'PORT': '',                      
+    }
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
@@ -94,15 +91,17 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
-STATIC_ROOT = 'staticfiles' #????
+STATIC_URL = '/Spots/static/'
 
-STATIC_URL = '/static/'
 
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, "static"),
-)
+#STATIC_ROOT = 'staticfiles' #????
+#STATICFILES_DIRS = (
+#    os.path.join(BASE_DIR, "static"),
+#)
+
 
 # template -- web site
 TEMPLATE_DIRS = (
+    os.path.join(BASE_DIR, "Sites"),
     os.path.join(BASE_DIR, "templates"),
 )
