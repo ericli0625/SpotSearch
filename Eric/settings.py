@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
-#BASE_DIR = /media/erichcli/Disk/Python-Project/Eric
+#BASE_DIR = /media/erichcli/Disk/Python-Project/SpotSearch
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
@@ -57,9 +57,9 @@ WSGI_APPLICATION = 'Eric.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
 
-
 import dj_database_url
 DATABASES = {'default': dj_database_url.config(default='postgres://qiivcofeurbrrq:ZrHRbAnPUaJTKo3lhyGCEKMMlI@ec2-54-83-204-104.compute-1.amazonaws.com:5432/d5sloc17vjd4sd')}
+
 
 #DATABASES = {
 #    'default': {
@@ -73,7 +73,6 @@ DATABASES = {'default': dj_database_url.config(default='postgres://qiivcofeurbrr
 #        'PORT': '',                      
 #    }
 #}
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
@@ -92,15 +91,17 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
-STATIC_ROOT = 'staticfiles' #????
-
 STATIC_URL = '/static/'
 
+#deploy
+STATIC_ROOT = 'staticfiles'         
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
 )
 
+
 # template -- web site
 TEMPLATE_DIRS = (
+    os.path.join(BASE_DIR, "Sites"),
     os.path.join(BASE_DIR, "templates"),
 )
