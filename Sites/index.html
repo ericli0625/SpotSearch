@@ -1,75 +1,13 @@
-<!DOCTYPE html>
-<html>
+{% extends 'base.html' %}
 
-<head>
-<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
-    <title>Travel Spots</title>
-    <!-- Bootstrap -->
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap.min.css">
-    <!-- Bootstrap theme -->
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap-theme.min.css">
+{% block title %}Travel Spots Home{% endblock %}
 
-<link href="{{ STATIC_URL }}css/carousel.css" rel="stylesheet">
-
-</head>
-
-    <style type="text/css">
-      html { height: 100% }
-      body { height: 100%; }
-    </style>
-
-<body>
-
-<div class="navbar-wrapper">
-  <div class="container">
-
-    <nav class="navbar navbar-inverse navbar-static-top">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" >Travel Spots</a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
-            <li class="active"><a href="/">Home</a></li>
-            <li><a href="{% url 'spots.views.datainfo' 'About' %}#01">About</a></li>
-            <li><a href="{% url 'spots.views.datainfo' 'Contact' %}#01">Contact</a></li>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">List of cities<span class="caret"></span></a>
-              <ul class="dropdown-menu" role="menu">
-{% for city_name in cities %}
-<li > <a href="{% url 'spots.views.choosecity' city_name %}#01" target="_top">{{city_name}}</a> </li>
-{% endfor %}
-              </ul>
-            </li>
-            <li >
-            <form class="navbar-form navbar-right" action="/SpotSearch/" method="get">
-                <div class="form-group">
-                    <input name="spot_search" type="text" class="form-control" placeholder="Search...">
-                </div>
-                <button class="btn btn-default" type="submit">Search</button>
-            </form>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-
-  </div>
-</div>
-
-{% include 'CarouselSpots.html' %}
-
+{% block content %}
 <div class="container" align="center">
     <h2>景點推薦</h2>
     <div class="panel-group" id="accordion">
     {% for choice in recommend_temp %}
-        <div class="panel panel-default">
+        <div class="panel panel-info">
           <div class="panel-heading">
             <h4 class="panel-title">
               <a data-toggle="collapse" data-parent="#accordion" href="#{{choice.name}}">{{choice.name}}</a>
@@ -86,25 +24,6 @@
         </div>
         </div>
     {% endfor %} 
-
     </div> 
-</div> <!-- /container -->
-
-<div class="container" >
-
-<!-- FOOTER -->
-<footer>
-    <p class="pull-right"><a href="#">Back to top</a></p>
-    <p>&copy; 2015 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
-</footer>
-
-</div> <!-- /container -->
-
-<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
-<script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
-
-<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
-<script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
-
-</body>
-</html>
+</div> 
+{% endblock %}

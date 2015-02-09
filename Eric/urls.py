@@ -12,10 +12,14 @@ urlpatterns = patterns('',
     # url(r'^blog/', include('blog.urls')),
 
     url(r'^admin/', include(admin.site.urls)),
+
     url(r'^$','spots.views.index',name='index'),
 
     url(r'^SpotSearch/$','spots.views.spotsearch',name='spotsearch'),
-    url(r'^Info/(?P<info>\w+)/$','spots.views.datainfo',name='datainfo'),
+
+    url(r'^AboutInfo/$','spots.views.aboutinfo',name='aboutinfo'),
+    
+    url(r'^ContactInfo/$','spots.views.contactinfo',name='contactinfo'),
 
     url(r'^(?P<city_name>\w+)/$','spots.views.choosecity',name='choosecity'),
 

@@ -1,6 +1,5 @@
-<!-- Carousel
-    ================================================== -->
-    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+<!-- Carousel================================================== -->
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
       <!-- Indicators -->
       <ol class="carousel-indicators">
         <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -9,7 +8,7 @@
       </ol>
       <div class="carousel-inner" role="listbox">
         <div class="item active">
-          <img src="https://farm9.staticflickr.com/8592/15943917579_50c389d200_o.jpg">
+          <img src="{{ STATIC_URL }}photo/taipei.jpg">
           <div class="container">
             <div class="carousel-caption">
               <h1>台北市</h1>
@@ -19,7 +18,7 @@
           </div>
         </div>
         <div class="item">
-          <img src="https://farm4.staticflickr.com/3867/15160921880_ed24a65f93_b.jpg" alt="Second slide">
+          <img src="{{ STATIC_URL }}photo/taichung.jpg" alt="Second slide">
           <div class="container">
             <div class="carousel-caption">
               <h1>台中市</h1>
@@ -29,7 +28,7 @@
           </div>
         </div>
         <div class="item">
-          <img src="http://static.panoramio.com/photos/large/115488367.jpg" alt="Third slide">
+          <img src="{{ STATIC_URL }}photo/kaohsiung.jpg" alt="Third slide">
           <div class="container">
             <div class="carousel-caption">
               <h1>高雄市</h1>
