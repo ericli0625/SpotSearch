@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}Travel Spots Home{% endblock %}
+
+{% block content %}
+<div class="container" align="center">
+    <h2>景點推薦</h2>
+    <div class="panel-group" id="accordion">
+    {% for choice in recommend_temp %}
+        <div class="panel panel-info">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" data-parent="#accordion" href="#{{choice.name}}">{{choice.name}}</a>
+            </h4>
+          </div>
+          <div id="{{choice.name}}" class="panel-collapse collapse">
+            <div class="panel-body">            
+            <p>{{choice.category}}</p>
+            <p>{{choice.address}}</p>
+            <p>{{choice.telephone}}</p>
+            <p>{{choice.content}}</p>
+            <p><iframe width="300" height="300" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src=http://maps.google.com.tw/maps?f=q&hl=zh-TW&geocode=&q={{choice.latitude}},{{choice.longitude}}({{choice.name}})&z=16&output=embed></iframe></p>
+          </div>
+        </div>
+        </div>
+    {% endfor %} 
+    </div> 
+</div> 
+{% endblock %}

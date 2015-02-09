@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %}Details{% endblock %}
+
+{% block content %}
+<div class="container">
+<div id="01"></div>
+    <div class="panel panel-success" align="center">
+    <div class="panel-heading">
+        <h3 class="panel-title">{{title}}{{title_zone}}</h3>
+    </div>
+        <div class="panel-body">
+        <div class="panel-group" id="accordion">
+        {% for choose in contents %}
+        <div class="panel panel-info">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" data-parent="#accordion" href="#{{choose.name}}">{{choose.name}}</a>
+            </h4>
+          </div>
+          <div id="{{choose.name}}" class="panel-collapse collapse">
+            <div class="panel-body">
+            <p>{{choose.category}}</p>
+            <p>{{choose.address}}</p>
+            <p>{{choose.telephone}}</p>
+            <p>{{choose.content}}</p>
+            <p><iframe width="260" height="260" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src=http://maps.google.com.tw/maps?f=q&hl=zh-TW&geocode=&q={{choose.latitude}},{{choose.longitude}}({{choose.name}})&z=16&output=embed&iwloc=p></iframe></p>
+            </div>
+          </div>
+        </div>
+        {% endfor %} 
+        </div><!-- /accordion -->
+        </div>
+    </div>
+
+<ul class="pager">
+    <li><a href="{% url 'spots.views.choosecity' title %}">Previous</a></li>
+</ul>
+
+</div> <!-- /container -->
+
+<div id="map_canvas" style=" width:80%; height:50%; margin:0 auto;"></div>
+
+{% endblock %}

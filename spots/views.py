@@ -21,12 +21,15 @@ def index(request):
 
     recommend_temp = random.sample(Totalspots.objects.all(),10)
 
-    return render(request,"index.html",{'cities':cities(),'recommend_temp':recommend_temp})
+    return render(request,"index.html",{'cities':cities(),'recommend_temp':recommend_temp,'navbar_id':'home'})
 
-def datainfo(request,info):
+def aboutinfo(request):
 
-    return render(request,"about.html",{'cities':cities(),'datainfo':info})
+    return render(request,"about.html",{'cities':cities(),'navbar_id':'about'})
 
+def contactinfo(request):
+
+    return render(request,"contact.html",{'cities':cities(),'navbar_id':'contact'})
 
 def citydetails(request,city_name,zone_name):
 
