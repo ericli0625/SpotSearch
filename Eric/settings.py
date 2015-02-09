@@ -61,8 +61,6 @@ WSGI_APPLICATION = 'Eric.wsgi.application'
 import dj_database_url
 DATABASES = {'default': dj_database_url.config(default='postgres://qiivcofeurbrrq:ZrHRbAnPUaJTKo3lhyGCEKMMlI@ec2-54-83-204-104.compute-1.amazonaws.com:5432/d5sloc17vjd4sd')}
 
-
-
 #DATABASES = {
 #    'default': {
 #        #'ENGINE': 'django.db.backends.mysql',
