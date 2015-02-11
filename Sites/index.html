@@ -4,7 +4,11 @@
 
 {% block content %}
 <div class="container" align="center">
-    <h2>景點推薦</h2>
+
+    <div class="page-header">
+      <h2>景點推薦</h2>
+    </div>
+
     <div class="panel-group" id="accordion">
     {% for choice in recommend_temp %}
         <div class="panel panel-info">
@@ -25,5 +29,6 @@
         </div>
     {% endfor %} 
     </div> 
+    <a href="{% url 'spots.views.news' %}#01" target="_top" >Parser</button>
 </div> 
 {% endblock %}

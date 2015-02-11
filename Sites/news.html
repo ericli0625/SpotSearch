@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}Travel Spots HTMLPARSER{% endblock %}
+
+{% block content %}
+<div class="container" align="center">
+<div id="01"></div>
+
+      <div class="page-header">
+        <h1>Travel News</h1>
+      </div>
+
+      	<div class="row" >
+      	<div class="col-lg-12">
+      	<div class="list-group">
+	    	{% for choice in dataFiled %}
+	        <form action="/News/Details/" method="POST">
+                {% csrf_token %}
+                <div class="form-group" >
+                    <input type="hidden" name="news_link" type="text" value={{choice.link}}>
+                </div>
+               	<a href="#" onclick="$(this).closest('form').submit()" class="list-group-item" >
+               	<table>
+	            	<tr>
+	            		<td><h4>{{choice.title}}</h4></td>
+	            		<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{choice.cite}}</td>
+	  				</tr>
+	            </table>
+	            </a>
+            </form>
+			{% endfor %}
+        </div>
+        </div><!-- /.col-lg-4 -->
+ 		</div><!-- /.row -->
+		
+</div>
+
+{% endblock %}

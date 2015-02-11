@@ -19,6 +19,10 @@ urlpatterns = patterns('',
 
     url(r'^AboutInfo/$','spots.views.aboutinfo',name='aboutinfo'),
     
+    url(r'^News/$','spots.views.news',name='news'),
+
+    url(r'^News/Details/$','spots.views.newsdetails',name='newsdetails'),
+
     url(r'^ContactInfo/$','spots.views.contactinfo',name='contactinfo'),
 
     url(r'^(?P<city_name>\w+)/$','spots.views.choosecity',name='choosecity'),

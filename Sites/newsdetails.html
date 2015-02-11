@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}Travel Spots HTMLPARSER{% endblock %}
+
+{% block content %}
+<div class="container" align="center">
+<div id="01"></div>
+
+      <div class="page-header">
+        <h1>Travel News</h1>
+      </div>
+
+    <div class="panel panel-success" align="center">
+    <div class="panel-heading">
+        <h2 class="panel-title">{{title}}</h2>
+    </div>
+        <div class="panel-body">
+
+            <p class="lead">{{contentbody}}</p>
+
+        </div>
+    </div>
+
+<ul class="pager">
+    <li><a href="{% url 'spots.views.news' %}">Previous</a></li>
+</ul>
+
+</div>
+
+{% endblock %}
