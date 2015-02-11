@@ -3,26 +3,37 @@
 {% block title %}Travel Spots HTMLPARSER{% endblock %}
 
 {% block content %}
-<div class="container" align="center">
+
+<style>
+#panel_body_style { 
+  padding-top:15px; 
+  padding-left:50px; 
+  padding-right:50px; 
+  padding-bottom:15px; 
+}
+</style>
+
+<div class="container">
 <div id="01"></div>
 
-      <div class="page-header">
+      <div class="page-header" align="center">
         <h1>Travel News</h1>
       </div>
 
-    <div class="panel panel-success" align="center">
+    <div class="panel panel-success">
     <div class="panel-heading">
-        <h2 class="panel-title">{{title}}</h2>
+        <h2 class="panel-title" align="center">{{title}}</h2>
     </div>
-        <div class="panel-body">
+        <div class="panel-body" style="padding-top:5%;  padding-left: 5%; padding-right:5%; padding-bottom:5%;">
 
-            <p class="lead">{{contentbody}}</p>
+            <p class="lead">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{contentbody}}</p>
+			<p align="right">{{newscite}}</p>
 
         </div>
     </div>
 
 <ul class="pager">
-    <li><a href="{% url 'spots.views.news' %}">Previous</a></li>
+    <li><a href="{% url 'spots.views.news' %}#01">Previous</a></li>
 </ul>
 
 </div>

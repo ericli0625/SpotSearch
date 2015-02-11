@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+# -*- coding:utf8 -*- 
 from django.shortcuts import render  
 import random
 from spots.models import Book ,Totalspots , Cities
@@ -56,11 +56,13 @@ class News:
 def newsdetails(request):
 
     if request.method == 'POST':
+
         if 'news_link' in request.POST and request.POST['news_link']:
 
-                list_body =[]
+                list_body = []
                 content_head = ''
                 content_body =''
+                news_cite = ''
 
                 news_link = request.POST['news_link']
 
@@ -75,8 +77,12 @@ def newsdetails(request):
                 templatebody = soup.find(id="mediaarticlebody")
                 for content in templatebody.find_all("p"):
                     content_body += content.get_text()
+                    #list_body.append(content.get_text().encode('utf-8'));
 
-                return render(request,"newsdetails.html",{'cities':cities(),'info':'OK','contentbody':content_body,'title':content_head})
+                for temp1 in templatehead.find_all('cite'):
+                    news_cite += temp1.get_text()
+
+                return render(request,"newsdetails.html",{'cities':cities(),'info':'OK','contentbody':content_body,'title':content_head,'newscite':news_cite})
 
     else:
         return render(request,"newsdetails.html",{'cities':cities(),'info':'error'})
