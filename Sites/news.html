@@ -20,11 +20,13 @@
                     <input type="hidden" name="news_link" type="text" value={{choice.link}}>
                 </div>
                	<a onclick="$(this).closest('form').submit()" class="list-group-item" >
-               	<table>
+               	<table >
 	            	<tr>
 	            		<td><h4>{{choice.title}}</h4></td>
-	            		<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{choice.cite}}</td>
-	  				</tr>
+	  				    </tr>
+                <tr>
+                  <td align="center">{{choice.cite}}</td>
+                </tr>
 	            </table>
 	            </a>
             </form>
