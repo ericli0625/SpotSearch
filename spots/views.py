@@ -1,7 +1,9 @@
-# -*- coding: utf-8 -*-
-from django.shortcuts import render  
+# -*- coding:utf8 -*-
+from django.shortcuts import render
 import random
 from spots.models import Book ,Totalspots , Cities
+from bs4 import BeautifulSoup
+import urllib
 
 def cities():
 
@@ -19,7 +21,7 @@ def choosecity(request,city_name):
 
 def index(request):
 
-    recommend_temp = random.sample(Totalspots.objects.all(),10)
+    recommend_temp = random.sample(Totalspots.objects.all(),5)
 
     return render(request,"index.html",{'cities':cities(),'recommend_temp':recommend_temp,'navbar_id':'home'})
 
@@ -43,3 +45,75 @@ def spotsearch(request):
         q = request.GET['spot_search']
         cite_temp = Totalspots.objects.filter(name__icontains=q)
         return render(request,"search.html",{'contents':cite_temp,'cities':cities()})
+
+class News:
+    def __init__(self,title, cite, link):
+        self.title = title
+        self.cite = cite
+        self.link = link
+
+
+def newsdetails(request):
+
+    if request.method == 'POST':
+
+        if 'news_link' in request.POST and request.POST['news_link']:
+
+                list_body = []
+                content_head = ''
+                content_body =''
+                news_cite = ''
+
+                news_link = request.POST['news_link']
+
+                website = urllib.urlopen(news_link.encode("utf8")) 
+
+                soup = BeautifulSoup(website)
+
+                templatehead = soup.find(id="mediaarticlehead")
+                for content in templatehead.find_all("h1"):
+                    content_head = content.get_text()
+
+                templatebody = soup.find(id="mediaarticlebody")
+                for content in templatebody.find_all("p"):
+                    content_body += content.get_text()
+                    #list_body.append(content.get_text().encode('utf-8'));
+
+                for temp1 in templatehead.find_all('cite'):
+                    news_cite += temp1.get_text()
+
+                return render(request,"newsdetails.html",{'cities':cities(),'info':'OK','contentbody':content_body,'title':content_head,'newscite':news_cite})
+
+    else:
+        return render(request,"newsdetails.html",{'cities':cities(),'info':'error'})
+
+    return render(request,"newsdetails.html",{'cities':cities(),'info':'OK'})
+
+def news(request):
+
+    website = urllib.urlopen("https://tw.news.yahoo.com/travel/archive/") 
+
+    yahoolink = 'https://tw.news.yahoo.com'
+
+    soup = BeautifulSoup(website)
+
+    template = soup.find(id="MediaStoryList")
+
+    list_link = []
+    list_title = []
+    list_cite = []
+
+    list_total = []
+
+    for name in template.find_all('h4'):
+        list_title.append(name.get_text())
+        for temp in name.find_all('a'):
+            list_link.append(yahoolink+temp.get('href'))
+
+    for temp1 in template.find_all('cite'):
+        list_cite.append(temp1.get_text())
+
+    for x in xrange(1,len(list_title)):
+        list_total.append(News(list_title[x],list_cite[x],list_link[x]))
+
+    return render(request,"news.html",{'cities':cities(),'dataFiled':list_total,'navbar_id':'news'})
