@@ -28,6 +28,6 @@ class Totalspots(models.Model):
 class Cities(models.Model):
 	cities = models.CharField(max_length=10)
 	city = models.CharField(max_length=10)
-	
+
 	def __unicode__(self):
 		return self.cities

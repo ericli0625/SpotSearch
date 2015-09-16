@@ -3,6 +3,7 @@
 {% block title %}Details{% endblock %}
 
 {% block content %}
+
 <div class="container">
 <div id="01"></div>
     <div class="panel panel-success" align="center">
@@ -20,13 +21,108 @@
           </div>
           <div id="{{choose.name}}" class="panel-collapse collapse">
             <div class="panel-body">
+            <p><a href="#myDialog{{choose.name}}" role="button" class="btn" data-toggle="modal"><img src="{{ STATIC_URL }}photo/heart.png" class="img-rounded" height="30" width="30"></a></p>
             <p>{{choose.category}}</p>
             <p>{{choose.address}}</p>
             <p>{{choose.telephone}}</p>
             <p>{{choose.content}}</p>
             <p><iframe width="260" height="260" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src=http://maps.google.com.tw/maps?f=q&hl=zh-TW&geocode=&q={{choose.latitude}},{{choose.longitude}}({{choose.name}})&z=16&output=embed&iwloc=p></iframe></p>
             </div>
+
           </div>
+
+<!-- google calender dialog -->
+<div id="myDialog{{choose.name}}" class="modal fade">
+  <div class="modal-dialog" id="{{choose.name}}">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"></span></button>
+        <h4 class="modal-title" id="choose_name">{{choose.name}}</h4>
+      </div>
+      <div class="modal-body">
+
+            <!-- google calender datetimepicker -->
+            <div class="container">
+                <div class="row">
+                    <div class='col-sm-3'>
+                        <div class="form-group">
+                            <div class='input-group date' id='datetimepicker1'>
+                                <input id="startdate" type='text' class="form-control"/>
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class='col-sm-3'>
+                        <div class="form-group">
+                            <div class='input-group date' id='datetimepicker2'>
+                                <input id="enddate" type='text' class="form-control"/>
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class='col-sm-3'>
+                        <div class="form-group">
+                            <div class='input-group date' id='datetimepicker3'>
+                                <input id="starttime" type='text' value='12:00' class="form-control"/>
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-time"></span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class='col-sm-3'>
+                        <div class="form-group">
+                            <div class='input-group date' id='datetimepicker4'>
+                                <input id="endtime" type='text' value='12:10' class="form-control"/>
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-time"></span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- google calender datetimepicker -->
+            <p>{{choose.category}}</p>
+            <p id="choose_address">{{choose.address}}</p>
+            <p id="choose_telephone">{{choose.telephone}}</p>
+            <p id="choose_content">{{choose.content}}</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" onclick="loadCalendarApi_2('{{choose.name}}','{{choose.address}}','{{choose.telephone}}','{{choose.content}}')" data-dismiss="modal" data-toggle="modal" data-target="#Modal2{{choose.name}}" >Add to Google Calendar</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<!-- google calender dialog -->
+
+<!-- google calender dialog 2 -->
+<div class="modal fade" id="Modal2{{choose.name}}" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">{{choose.name}}</h4>
+            </div>
+            <div class="modal-body">
+              <p>Adding event success to Google Calendar.</p>
+              <p id="demo"></p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+  </div>
+<!-- google calender dialog 2 -->
+
         </div>
         {% endfor %}
         </div><!-- /accordion -->
@@ -40,5 +136,96 @@
 </div> <!-- /container -->
 
 <div id="map_canvas" style=" width:80%; height:50%; margin:0 auto;"></div>
+
+
+<script type="text/javascript">
+
+
+    var d = new Date();
+    var curr_date = d.getDate();
+    var curr_month = d.getMonth() + 1; //Months are zero based
+    var curr_year = d.getFullYear();
+
+
+$(function () {
+
+    $('#datetimepicker1').datetimepicker({
+        format : 'YYYY-MM-DD',
+        defaultDate : curr_year + "-" + curr_month + "-" + curr_date
+    });
+    $('#datetimepicker2').datetimepicker({
+        format : 'YYYY-MM-DD',
+        defaultDate : curr_year + "-" + curr_month + "-" + curr_date,
+        useCurrent: false //Important! See issue #1075
+    });
+    $("#datetimepicker1").on("dp.change", function (e) {
+        $('#datetimepicker2').data("DateTimePicker").minDate(e.date);
+    });
+    $("#datetimepicker2").on("dp.change", function (e) {
+        $('#datetimepicker1').data("DateTimePicker").maxDate(e.date);
+    });
+
+    $('#datetimepicker3').datetimepicker({
+        format : 'HH:mm'
+    });
+    $('#datetimepicker4').datetimepicker({
+        format : 'HH:mm'
+    });
+    $("#datetimepicker3").on("dp.change", function (e) {
+        if (e.oldDate === null) {
+            $('#datetimepicker3').data('DateTimePicker').date(new Date(new Date().setHours(12, 00)));
+        }
+    });
+    $("#datetimepicker4").on("dp.change", function (e) {
+        if (e.oldDate === null) {
+            $('#datetimepicker4').data('DateTimePicker').date(new Date(new Date().setHours(12, 10)));
+        }
+    });
+});
+
+
+function loadCalendarApi_2(name,address,telephone,content) {
+
+    //handleAuthClick();
+
+    gapi.client.load('calendar', 'v3').then(function() {
+
+        var startdate = document.getElementById("startdate").value;
+        var enddate = document.getElementById("enddate").value;
+        var starttime = document.getElementById("starttime").value;
+        var endtime = document.getElementById("endtime").value;
+
+        //document.getElementById("demo").innerHTML = startdate +'T'+ starttime + ':00+08:00' +"   "+enddate +'T'+ endtime + ':00+08:00';
+
+        var event = {
+          'summary': name,
+          'location': name,
+          'description': "聯絡電話:"+telephone+" "+content,
+          'start': {
+            'dateTime': startdate +'T'+ starttime + ':00+08:00',
+            'timeZone': 'Asia/Taipei'
+          },
+          'end': {
+            'dateTime': enddate +'T'+ endtime + ':00+08:00' ,
+            'timeZone': 'Asia/Taipei'
+          },
+          'recurrence': [
+            'RRULE:FREQ=DAILY;COUNT=1'
+          ]
+        };
+
+        var request = gapi.client.calendar.events.insert({
+          'calendarId': 'primary',
+          'resource': event
+        });
+
+        request.execute();
+    });
+
+
+}
+
+</script>
+
 
 {% endblock %}

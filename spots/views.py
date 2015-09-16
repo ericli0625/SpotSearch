@@ -17,12 +17,16 @@ def choosecity(request,city_name):
 
     cite_temp = Cities.objects.filter(cities=city_name)
 
-    return render(request,"citylist.html",{'contents':cite_temp,'title':city_name,'cities':cities()})
+    cite_temp1 = Totalspots.objects.filter(cities=city_name)
+
+    return render(request,"citylist.html",{'contents1':cite_temp,'contents':cite_temp1,'title':city_name,'cities':cities()})
 
 def index(request):
 
     recommend_temp = random.sample(Totalspots.objects.all(),5)
 
+    #return render(request,"login.html",{'cities':cities(),'recommend_temp':recommend_temp,'navbar_id':'home'})
+    #return render(request,"quickstart.html",{'cities':cities(),'recommend_temp':recommend_temp,'navbar_id':'home'})
     return render(request,"index.html",{'cities':cities(),'recommend_temp':recommend_temp,'navbar_id':'home'})
 
 def aboutinfo(request):

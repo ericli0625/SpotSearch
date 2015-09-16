@@ -11,7 +11,7 @@
     </div>
     <div class="panel-body" id="panel_body_style" >
       <div class="row">
-        {% for name in contents %}
+        {% for name in contents1 %}
         <div class="col-xs-6 col-lg-2" id="panel_body_style" >
         <a class="btn btn-default" href="{% url 'spots.views.citydetails' title name.city %}#01" role="button">{{name.city}}</a>
         </div>
@@ -23,5 +23,8 @@
 <ul class="pager">
     <li><a href="/#01">Previous</a></li>
 </ul>
-</div>
+</div> <!-- /container -->
+
+<div id="map_canvas" style=" width:80%; height:50%; margin:0 auto;"></div>
+
 {% endblock %}
