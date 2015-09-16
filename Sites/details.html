@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}Details{% endblock %}
+{% block title %}City Spots{% endblock %}
 
 {% block content %}
 
@@ -41,45 +41,28 @@
       </div>
       <div class="modal-body">
 
-            <!-- google calender datetimepicker -->
             <div class="container">
                 <div class="row">
-                    <div class='col-sm-3'>
-                        <div class="form-group">
-                            <div class='input-group date' id='datetimepicker1'>
-                                <input id="startdate" type='text' class="form-control"/>
-                                <span class="input-group-addon">
-                                    <span class="glyphicon glyphicon-calendar"></span>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class='col-sm-3'>
-                        <div class="form-group">
-                            <div class='input-group date' id='datetimepicker2'>
-                                <input id="enddate" type='text' class="form-control"/>
-                                <span class="input-group-addon">
-                                    <span class="glyphicon glyphicon-calendar"></span>
-                                </span>
-                            </div>
-                        </div>
+                    <div class='col-sm-6'>
+                        <H4 align="center">Start:</H4>
                     </div>
                 </div>
+                <!-- google calender datetimepicker1 -->
                 <div class="row">
                     <div class='col-sm-3'>
                         <div class="form-group">
-                            <div class='input-group date' id='datetimepicker3'>
-                                <input id="starttime" type='text' value='12:00' class="form-control"/>
+                            <div class='input-group date' id='datetimepicker{{choose.name}}1'>
+                                <input id="startdate{{choose.name}}" type='text' class="form-control"/>
                                 <span class="input-group-addon">
-                                    <span class="glyphicon glyphicon-time"></span>
+                                    <span class="glyphicon glyphicon-calendar"></span>
                                 </span>
                             </div>
                         </div>
                     </div>
                     <div class='col-sm-3'>
                         <div class="form-group">
-                            <div class='input-group date' id='datetimepicker4'>
-                                <input id="endtime" type='text' value='12:10' class="form-control"/>
+                            <div class='input-group date' id='datetimepicker{{choose.name}}3'>
+                                <input id="starttime{{choose.name}}" type='text' value='12:00' class="form-control"/>
                                 <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-time"></span>
                                 </span>
@@ -87,13 +70,94 @@
                         </div>
                     </div>
                 </div>
+                <!-- google calender datetimepicker1 -->
+                <div class="row">
+                    <div class='col-sm-6'>
+                        <H4 align="center">End:</H4>
+                    </div>
+                </div>
+                <!-- google calender datetimepicker2 -->
+                <div class="row">
+                    <div class='col-sm-3'>
+                        <div class="form-group">
+                            <div class='input-group date' id='datetimepicker{{choose.name}}2'>
+                                <input id="enddate{{choose.name}}" type='text' class="form-control"/>
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class='col-sm-3'>
+                        <div class="form-group">
+                            <div class='input-group date' id='datetimepicker{{choose.name}}4'>
+                                <input id="endtime{{choose.name}}" type='text' value='12:30' class="form-control"/>
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-time"></span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- google calender datetimepicker2 -->
+                <div class="row">
+                    <div class='col-sm-6'>
+                        <p>{{choose.category}}</p>
+                        <p id="choose_address">{{choose.address}}</p>
+                        <p id="choose_telephone">{{choose.telephone}}</p>
+                        <p id="choose_content">{{choose.content}}</p>
+                    </div>
+                </div>
+
+<script type="text/javascript">
+
+    var d = new Date();
+    var curr_date = d.getDate();
+    var curr_month = d.getMonth() + 1; //Months are zero based
+    var curr_year = d.getFullYear();
+
+
+$(function () {
+
+    $('#datetimepicker{{choose.name}}1').datetimepicker({
+        format : 'YYYY-MM-DD',
+        defaultDate : curr_year + "-" + curr_month + "-" + curr_date
+    });
+    $('#datetimepicker{{choose.name}}2').datetimepicker({
+        format : 'YYYY-MM-DD',
+        defaultDate : curr_year + "-" + curr_month + "-" + curr_date,
+        useCurrent: false //Important! See issue #1075
+    });
+    $("#datetimepicker{{choose.name}}1").on("dp.change", function (e) {
+        $('#datetimepicker{{choose.name}}2').data("DateTimePicker").minDate(e.date);
+    });
+    $("#datetimepicker{{choose.name}}2").on("dp.change", function (e) {
+        $('#datetimepicker{{choose.name}}1').data("DateTimePicker").maxDate(e.date);
+    });
+
+    $('#datetimepicker{{choose.name}}3').datetimepicker({
+        format : 'HH:mm'
+    });
+    $('#datetimepicker{{choose.name}}4').datetimepicker({
+        format : 'HH:mm'
+    });
+    $("#datetimepicker{{choose.name}}3").on("dp.change", function (e) {
+        if (e.oldDate === null) {
+            $('#datetimepicker{{choose.name}}3').data('DateTimePicker').date(new Date(new Date().setHours(12, 00)));
+        }
+    });
+    $("#datetimepicker{{choose.name}}4").on("dp.change", function (e) {
+        if (e.oldDate === null) {
+            $('#datetimepicker{{choose.name}}4').data('DateTimePicker').date(new Date(new Date().setHours(12, 10)));
+        }
+    });
+});
+</script>
+
             </div>
-            <!-- google calender datetimepicker -->
-            <p>{{choose.category}}</p>
-            <p id="choose_address">{{choose.address}}</p>
-            <p id="choose_telephone">{{choose.telephone}}</p>
-            <p id="choose_content">{{choose.content}}</p>
+
       </div>
+
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary" onclick="loadCalendarApi_2('{{choose.name}}','{{choose.address}}','{{choose.telephone}}','{{choose.content}}')" data-dismiss="modal" data-toggle="modal" data-target="#Modal2{{choose.name}}" >Add to Google Calendar</button>
@@ -141,59 +205,16 @@
 <script type="text/javascript">
 
 
-    var d = new Date();
-    var curr_date = d.getDate();
-    var curr_month = d.getMonth() + 1; //Months are zero based
-    var curr_year = d.getFullYear();
-
-
-$(function () {
-
-    $('#datetimepicker1').datetimepicker({
-        format : 'YYYY-MM-DD',
-        defaultDate : curr_year + "-" + curr_month + "-" + curr_date
-    });
-    $('#datetimepicker2').datetimepicker({
-        format : 'YYYY-MM-DD',
-        defaultDate : curr_year + "-" + curr_month + "-" + curr_date,
-        useCurrent: false //Important! See issue #1075
-    });
-    $("#datetimepicker1").on("dp.change", function (e) {
-        $('#datetimepicker2').data("DateTimePicker").minDate(e.date);
-    });
-    $("#datetimepicker2").on("dp.change", function (e) {
-        $('#datetimepicker1').data("DateTimePicker").maxDate(e.date);
-    });
-
-    $('#datetimepicker3').datetimepicker({
-        format : 'HH:mm'
-    });
-    $('#datetimepicker4').datetimepicker({
-        format : 'HH:mm'
-    });
-    $("#datetimepicker3").on("dp.change", function (e) {
-        if (e.oldDate === null) {
-            $('#datetimepicker3').data('DateTimePicker').date(new Date(new Date().setHours(12, 00)));
-        }
-    });
-    $("#datetimepicker4").on("dp.change", function (e) {
-        if (e.oldDate === null) {
-            $('#datetimepicker4').data('DateTimePicker').date(new Date(new Date().setHours(12, 10)));
-        }
-    });
-});
-
-
 function loadCalendarApi_2(name,address,telephone,content) {
 
-    //handleAuthClick();
+    handleAuthClick();
 
     gapi.client.load('calendar', 'v3').then(function() {
 
-        var startdate = document.getElementById("startdate").value;
-        var enddate = document.getElementById("enddate").value;
-        var starttime = document.getElementById("starttime").value;
-        var endtime = document.getElementById("endtime").value;
+        var startdate = document.getElementById("startdate"+name).value;
+        var enddate = document.getElementById("enddate"+name).value;
+        var starttime = document.getElementById("starttime"+name).value;
+        var endtime = document.getElementById("endtime"+name).value;
 
         //document.getElementById("demo").innerHTML = startdate +'T'+ starttime + ':00+08:00' +"   "+enddate +'T'+ endtime + ':00+08:00';
 
