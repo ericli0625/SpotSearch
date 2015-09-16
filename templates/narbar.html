@@ -42,9 +42,9 @@
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">List of cities<span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
-{% for city_name in cities %}
-<li > <a href="{% url 'spots.views.choosecity' city_name %}#01" target="_top">{{city_name}}</a> </li>
-{% endfor %}
+              {% for city_name in cities %}
+              <li > <a href="{% url 'spots.views.choosecity' city_name %}#01" target="_top">{{city_name}}</a> </li>
+              {% endfor %}
               </ul>
             </li>
 
@@ -56,6 +56,13 @@
                 </div>
                 <button class="btn btn-default" type="submit">Search</button>
             </form>
+            </li>
+
+            <li class="dropdown" >
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Login<span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+              <li><a id="authorize-button" onclick="handleAuthClick()">Login</a></li>
+              </ul>
             </li>
 
           </ul>

@@ -5,6 +5,8 @@
 
       var SCOPES = ["https://www.googleapis.com/auth/calendar"];
 
+      var login_flag = 0;
+
       /**
        * Check if current user has authorized this application.
        */
@@ -23,16 +25,26 @@
        * @param {Object} authResult Authorization result.
        */
       function handleAuthResult(authResult) {
-
+        var authorizeButton = document.getElementById('authorize-button');
         if (authResult && !authResult.error) {
-          // Hide auth UI, then load client library.
-
-          //loadCalendarApi();
+          authorizeButton.style.display = 'none';
+          login_flag = 1;
         } else {
-          // Show auth UI, allowing the user to initiate authorization by
-          // clicking authorize button.
-
+          authorizeButton.style.visibility = '';
+          authorizeButton.onclick = handleAuthClick;
         }
+
+      }
+
+      function decideLogin(name){
+
+
+        if(login_flag){
+          document.getElementById("authorizeImg"+name).style.visibility = '';
+        }else{
+          document.getElementById("authorizeImg"+name).style.display = 'none';
+        }
+
       }
 
       /**
@@ -42,11 +54,52 @@
        */
       function handleAuthClick(event) {
         gapi.auth.authorize(
-          {client_id: CLIENT_ID, scope: SCOPES, immediate: false},
-          handleAuthResult);
+          {
+             client_id: CLIENT_ID,
+             scope: SCOPES,
+             immediate: false
+          }, handleAuthResult);
         return false;
       }
 
+
+      function loadCalendarApi_2(name,address,telephone,content) {
+
+          gapi.client.load('calendar', 'v3').then(function() {
+
+              var startdate = document.getElementById("startdate"+name).value;
+              var enddate = document.getElementById("enddate"+name).value;
+              var starttime = document.getElementById("starttime"+name).value;
+              var endtime = document.getElementById("endtime"+name).value;
+
+              //document.getElementById("demo").innerHTML = startdate +'T'+ starttime + ':00+08:00' +"   "+enddate +'T'+ endtime + ':00+08:00';
+
+              var event = {
+                'summary': name,
+                'location': name,
+                'description': "聯絡電話:"+telephone+" "+content,
+                'start': {
+                  'dateTime': startdate +'T'+ starttime + ':00+08:00',
+                  'timeZone': 'Asia/Taipei'
+                },
+                'end': {
+                  'dateTime': enddate +'T'+ endtime + ':00+08:00' ,
+                  'timeZone': 'Asia/Taipei'
+                },
+                'recurrence': [
+                  'RRULE:FREQ=DAILY;COUNT=1'
+                ]
+              };
+
+              var request = gapi.client.calendar.events.insert({
+                'calendarId': 'primary',
+                'resource': event
+              });
+
+              request.execute();
+          });
+
+      }
 
 
 </script>
