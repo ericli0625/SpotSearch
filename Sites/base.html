@@ -22,7 +22,15 @@
     {% include 'map.html' %}
     {% include 'googlecalendar.html' %}
 
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.min.js"></script>
 
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script type="text/javascript" src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
+
+    <script type="text/javascript" src="{{ STATIC_URL }}js/moment.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/bootstrap-datetimepicker.min.js"></script>
+    
 </head>
 
 <style>
@@ -54,12 +62,3 @@
 
 </body>
 </html>
-
-    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
-    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.min.js"></script>
-
-    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
-    <script type="text/javascript" src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
-
-    <script type="text/javascript" src="{{ STATIC_URL }}js/moment.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}js/bootstrap-datetimepicker.min.js"></script>
