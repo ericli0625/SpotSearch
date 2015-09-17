@@ -34,22 +34,21 @@
             {% endif %}
 
             {% if navbar_id == 'news' %}
-            <li class="active"><a href="{% url 'spots.views.news' %}#01">News</a></li>
+            <li class="active"><a href="{% url 'spots.views.news' %}#01">Travel News</a></li>
             {%else%}
-            <li><a href="{% url 'spots.views.news' %}#01">News</a></li>
+            <li><a href="{% url 'spots.views.news' %}#01">Travel News</a></li>
             {% endif %}
 
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">List of cities<span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
-{% for city_name in cities %}
-<li > <a href="{% url 'spots.views.choosecity' city_name %}#01" target="_top">{{city_name}}</a> </li>
-{% endfor %}
+              {% for city_name in cities %}
+              <li > <a href="{% url 'spots.views.choosecity' city_name %}#01" target="_top">{{city_name}}</a> </li>
+              {% endfor %}
               </ul>
             </li>
 
             <li>
-
             <form class="navbar-form navbar-right" action="/SpotSearch/#01" method="get">
 
                 <div class="form-group">
@@ -59,10 +58,17 @@
             </form>
             </li>
 
+            <li class="dropdown" >
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Google Calendar<span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li id="authorize-button"><a onclick="handleAuthClick()">Login Google</a></li>
+                <li id="calendar-button" style="display:none" ><a href="https://www.google.com/calendar/" target="_blank">View Calendar</a></li>
+              </ul>
+            </li>
+
           </ul>
         </div>
       </div>
     </nav>
-
   </div>
 </div>

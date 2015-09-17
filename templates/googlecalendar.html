@@ -80,6 +80,19 @@
                   enddate = curr_year + "-" + curr_month + "-" + curr_date;
               }
 
+<<<<<<< HEAD
+=======
+              var attendees = document.getElementById("attendees_box"+name).value;
+              var attendeesArray = new Array();
+              var string_list;
+
+              if (attendees != ""){
+
+                  attendeesArray = attendees.split(/[,;\/ -]/);
+
+              }
+
+>>>>>>> developer
               var event = {
                 'summary': name,
                 'location': name,
@@ -94,9 +107,43 @@
                 },
                 'recurrence': [
                   'RRULE:FREQ=DAILY;COUNT=1'
+<<<<<<< HEAD
                 ]
               };
 
+=======
+                ],
+                'reminders': {
+                  'useDefault': false,
+                  'overrides': [
+                    {'method': 'email', 'minutes': 24 * 60},
+                    {'method': 'popup', 'minutes': 15}
+                  ]
+                },
+                'attendees': [
+                ]
+              };
+
+              for (var i = attendeesArray.length - 1; i >= 0; i--) {
+                var item = attendeesArray[i];
+
+                if(attendeesArray[i]!=''){
+
+                  alert("indexOf "+attendeesArray[i].indexOf("@"))
+                  alert("lastIndexOf "+attendeesArray[i].lastIndexOf("@"))
+
+                  if((attendeesArray[i].indexOf("@") != -1) == (attendeesArray[i].lastIndexOf("@") != -1)){
+                    event.attendees.push({
+                      'email': item
+                    });
+                  }
+
+                  //alert("attendeesArray["+i+"] = "+attendeesArray[i]);
+                }
+
+              };
+
+>>>>>>> developer
               var request = gapi.client.calendar.events.insert({
                 'calendarId': 'primary',
                 'resource': event

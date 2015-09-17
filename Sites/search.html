@@ -1,34 +1,46 @@
 {% extends 'base.html' %}
 
-{% block title %}Search Spot{% endblock %}
+{% block title %}Search Spots{% endblock %}
 
 {% block content %}
 <div class="container">
 <div id="01"></div>
     <div class="panel panel-success" align="center">
-    <div class="panel-heading">
-        <h3 class="panel-title">Search Result</h3>
-    </div>
+
+        <div class="panel-heading">
+            <h3 class="panel-title">Search Result</h3>
+        </div>
+
         <div class="panel-body">
         <div class="panel-group" id="accordion">
-        {% for choose in contents %}
-        <div class="panel panel-info">
-          <div class="panel-heading">
-            <h4 class="panel-title">
-              <a data-toggle="collapse" data-parent="#accordion" href="#{{choose.name}}">{{choose.name}}</a>
-            </h4>
-          </div>
-          <div id="{{choose.name}}" class="panel-collapse collapse in">
-            <div class="panel-body">
-            <p>{{choose.category}}</p>
-            <p>{{choose.address}}</p>
-            <p>{{choose.telephone}}</p>
-            <p>{{choose.content}}</p>
-            <p><iframe width="260" height="260" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src=http://maps.google.com.tw/maps?f=q&hl=zh-TW&geocode=&q={{choose.latitude}},{{choose.longitude}}({{choose.name}})&z=16&output=embed&iwloc=p></iframe></p>
+        {% if contents%}
+            {% for choose in contents %}
+            <div class="panel panel-info">
+              <div class="panel-heading">
+                <h4 class="panel-title">
+                  <a data-toggle="collapse" data-parent="#accordion" href="#{{choose.name}}">{{choose.name}}</a>
+                </h4>
+              </div>
+              <div id="{{choose.name}}" class="panel-collapse collapse in">
+                <div class="panel-body">
+                <p id="authorizeImg{{choose.name}}"><a href="#myDialog{{choose.name}}" role="button" class="btn" data-toggle="modal"><img src="{{ STATIC_URL }}photo/heart.png" class="img-rounded" height="30" width="30"></a></p>
+                <p>{{choose.category}}</p>
+                <p>{{choose.address}}</p>
+                <p>{{choose.telephone}}</p>
+                <p>{{choose.content}}</p>
+                <p><iframe width="260" height="260" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src=http://maps.google.com.tw/maps?f=q&hl=zh-TW&geocode=&q={{choose.latitude}},{{choose.longitude}}({{choose.name}})&z=16&output=embed&iwloc=p></iframe></p>
+                </div>
+              </div>
+
+              {% include 'calenderDialog.html' %}
+
             </div>
-          </div>
-        </div>
-        {% endfor %} 
+            {% endfor %}
+        {% else %}
+            <h4 class="panel-title">
+                <P><H4>找不到景點</H4></P>
+            </h4>
+        {% endif %}
         </div><!-- /accordion -->
         </div>
     </div>

@@ -1,5 +1,6 @@
 # -*- coding:utf8 -*-
 from django.shortcuts import render
+from django.shortcuts import redirect
 import random
 from spots.models import Book ,Totalspots , Cities
 from bs4 import BeautifulSoup
@@ -17,7 +18,9 @@ def choosecity(request,city_name):
 
     cite_temp = Cities.objects.filter(cities=city_name)
 
-    return render(request,"citylist.html",{'contents':cite_temp,'title':city_name,'cities':cities()})
+    cite_temp1 = Totalspots.objects.filter(cities=city_name)
+
+    return render(request,"citylist.html",{'contents1':cite_temp,'contents':cite_temp1,'title':city_name,'cities':cities()})
 
 def index(request):
 
@@ -44,7 +47,14 @@ def spotsearch(request):
     if 'spot_search' in request.GET and request.GET['spot_search']:
         q = request.GET['spot_search']
         cite_temp = Totalspots.objects.filter(name__icontains=q)
-        return render(request,"search.html",{'contents':cite_temp,'cities':cities()})
+        if not cite_temp:
+            return render(request,"search.html",{'contents':cite_temp,'cities':cities()})
+        else:
+            return render(request,"search.html",{'contents':cite_temp,'cities':cities()})
+    else:
+        recommend_temp = random.sample(Totalspots.objects.all(),5)
+
+        return  render(request, 'index.html',{'cities':cities(),'recommend_temp':recommend_temp,'navbar_id':'home'})
 
 class News:
     def __init__(self,title, cite, link):
@@ -66,7 +76,7 @@ def newsdetails(request):
 
                 news_link = request.POST['news_link']
 
-                website = urllib.urlopen(news_link.encode("utf8")) 
+                website = urllib.urlopen(news_link.encode("utf8"))
 
                 soup = BeautifulSoup(website)
 
@@ -91,7 +101,7 @@ def newsdetails(request):
 
 def news(request):
 
-    website = urllib.urlopen("https://tw.news.yahoo.com/travel/archive/") 
+    website = urllib.urlopen("https://tw.news.yahoo.com/travel/archive/")
 
     yahoolink = 'https://tw.news.yahoo.com'
 

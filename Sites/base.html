@@ -2,7 +2,7 @@
 <html>
 
 <head>
-<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
     <title>{% block title %}{% endblock %}</title>
     <!-- Bootstrap -->
     <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap.min.css">
@@ -10,17 +10,28 @@
     <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap-theme.min.css">
 
     <!-- Custom styles for this template -->
-    <link href="{{ STATIC_URL }}css/carousel.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/carousel.css" media="screen">
+
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/bootstrap-datetimepicker.css">
 
     <style type="text/css">
       html { height: 100% }
       body { height: 100%; }
     </style>
 
-{% include 'map.html' %}
+    {% include 'map.html' %}
+    {% include 'googlecalendar.html' %}
+
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.min.js"></script>
+
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script type="text/javascript" src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
+
+    <script type="text/javascript" src="{{ STATIC_URL }}js/moment.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/bootstrap-datetimepicker.min.js"></script>
 
 </head>
-
 <style>
 #panel_body_style {
   padding-top:15px;
@@ -39,19 +50,14 @@
 {% block content %}{% endblock %}
 
 <div class="container">
-<!-- FOOTER -->
-<footer>
-    <p class="pull-right"><a href="#">Back to top</a></p>
-    <p>&copy; 2015 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
-</footer>
+
+    <!-- FOOTER -->
+    <footer>
+        <p class="pull-right"><a href="#">Back to top</a></p>
+        <p>&copy; 2015 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+    </footer>
 
 </div> <!-- /container -->
-
-<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
-<script src="{{ STATIC_URL }}js/jquery.min.js"></script>
-
-<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
-<script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
 
 </body>
 </html>
