@@ -83,7 +83,6 @@
     var curr_month = d.getMonth() + 1; //Months are zero based
     var curr_year = d.getFullYear();
 
-
 $(function () {
 
     $('#datetimepicker{{choose.name}}1').datetimepicker({
@@ -127,7 +126,7 @@ $(function () {
 
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" onclick="loadCalendarApi_2('{{choose.name}}','{{choose.address}}','{{choose.telephone}}','{{choose.content}}')" data-dismiss="modal" data-toggle="modal" data-target="#Modal2{{choose.name}}" >Add to Google Calendar</button>
+        <button type="button" class="btn btn-primary" onclick="loadCalendarApi('{{choose.name}}','{{choose.address}}','{{choose.telephone}}','{{choose.content}}')" data-dismiss="modal" data-toggle="modal" data-target="#Modal2{{choose.name}}" >Add to Google Calendar</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->

@@ -34,9 +34,9 @@
             {% endif %}
 
             {% if navbar_id == 'news' %}
-            <li class="active"><a href="{% url 'spots.views.news' %}#01">News</a></li>
+            <li class="active"><a href="{% url 'spots.views.news' %}#01">Travel News</a></li>
             {%else%}
-            <li><a href="{% url 'spots.views.news' %}#01">News</a></li>
+            <li><a href="{% url 'spots.views.news' %}#01">Travel News</a></li>
             {% endif %}
 
             <li class="dropdown">
@@ -61,7 +61,8 @@
             <li class="dropdown" >
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Login<span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
-              <li><a id="authorize-button" onclick="handleAuthClick()">Login</a></li>
+                <li id="authorize-button"><a onclick="handleAuthClick()">Login</a></li>
+                <li id="calendar-button" style="display:none" ><a href="https://www.google.com/calendar/" target="_blank">Calendar</a></li>
               </ul>
             </li>
 

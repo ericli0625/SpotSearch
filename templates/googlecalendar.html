@@ -26,11 +26,13 @@
        */
       function handleAuthResult(authResult) {
         var authorizeButton = document.getElementById('authorize-button');
+        var calendarButton = document.getElementById('calendar-button');
         if (authResult && !authResult.error) {
           authorizeButton.style.display = 'none';
+          calendarButton.style.display = 'inline';
           login_flag = 1;
         } else {
-          authorizeButton.style.visibility = '';
+          authorizeButton.style.display = 'inline';
           authorizeButton.onclick = handleAuthClick;
         }
 
@@ -38,9 +40,8 @@
 
       function decideLogin(name){
 
-
         if(login_flag){
-          document.getElementById("authorizeImg"+name).style.visibility = '';
+          document.getElementById("authorizeImg"+name).style.display = 'inline';
         }else{
           document.getElementById("authorizeImg"+name).style.display = 'none';
         }
@@ -63,7 +64,7 @@
       }
 
 
-      function loadCalendarApi_2(name,address,telephone,content) {
+      function loadCalendarApi(name,address,telephone,content) {
 
           gapi.client.load('calendar', 'v3').then(function() {
 
@@ -73,6 +74,11 @@
               var endtime = document.getElementById("endtime"+name).value;
 
               //document.getElementById("demo").innerHTML = startdate +'T'+ starttime + ':00+08:00' +"   "+enddate +'T'+ endtime + ':00+08:00';
+
+              if (startdate == null && enddate == null){
+                  startdate = curr_year + "-" + curr_month + "-" + curr_date;
+                  enddate = curr_year + "-" + curr_month + "-" + curr_date;
+              }
 
               var event = {
                 'summary': name,
