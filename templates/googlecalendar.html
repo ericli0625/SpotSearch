@@ -1,0 +1,113 @@
+<script type="text/javascript">
+      // Your Client ID can be retrieved from your project in the Google
+      // Developer Console, https://console.developers.google.com
+      var CLIENT_ID = '445469421856-881p886a5p8h3gm92td7q2pgutk0hmpo.apps.googleusercontent.com';
+
+      var SCOPES = ["https://www.googleapis.com/auth/calendar"];
+
+      var login_flag = 0;
+
+      /**
+       * Check if current user has authorized this application.
+       */
+      function checkAuth() {
+        gapi.auth.authorize(
+          {
+            'client_id': CLIENT_ID,
+            'scope': SCOPES,
+            'immediate': true
+          }, handleAuthResult);
+      }
+
+      /**
+       * Handle response from authorization server.
+       *
+       * @param {Object} authResult Authorization result.
+       */
+      function handleAuthResult(authResult) {
+        var authorizeButton = document.getElementById('authorize-button');
+        var calendarButton = document.getElementById('calendar-button');
+        if (authResult && !authResult.error) {
+          authorizeButton.style.display = 'none';
+          calendarButton.style.display = 'inline';
+          login_flag = 1;
+        } else {
+          authorizeButton.style.display = 'inline';
+          authorizeButton.onclick = handleAuthClick;
+        }
+
+      }
+
+      function decideLogin(name){
+
+        if(login_flag){
+          document.getElementById("authorizeImg"+name).style.display = 'inline';
+        }else{
+          document.getElementById("authorizeImg"+name).style.display = 'none';
+        }
+
+      }
+
+      /**
+       * Initiate auth flow in response to user clicking authorize button.
+       *
+       * @param {Event} event Button click event.
+       */
+      function handleAuthClick(event) {
+        gapi.auth.authorize(
+          {
+             client_id: CLIENT_ID,
+             scope: SCOPES,
+             immediate: false
+          }, handleAuthResult);
+        return false;
+      }
+
+
+      function loadCalendarApi(name,address,telephone,content) {
+
+          gapi.client.load('calendar', 'v3').then(function() {
+
+              var startdate = document.getElementById("startdate"+name).value;
+              var enddate = document.getElementById("enddate"+name).value;
+              var starttime = document.getElementById("starttime"+name).value;
+              var endtime = document.getElementById("endtime"+name).value;
+
+              //document.getElementById("demo").innerHTML = startdate +'T'+ starttime + ':00+08:00' +"   "+enddate +'T'+ endtime + ':00+08:00';
+
+              if (startdate == null && enddate == null){
+                  startdate = curr_year + "-" + curr_month + "-" + curr_date;
+                  enddate = curr_year + "-" + curr_month + "-" + curr_date;
+              }
+
+              var event = {
+                'summary': name,
+                'location': name,
+                'description': "聯絡電話:"+telephone+" "+content,
+                'start': {
+                  'dateTime': startdate +'T'+ starttime + ':00+08:00',
+                  'timeZone': 'Asia/Taipei'
+                },
+                'end': {
+                  'dateTime': enddate +'T'+ endtime + ':00+08:00' ,
+                  'timeZone': 'Asia/Taipei'
+                },
+                'recurrence': [
+                  'RRULE:FREQ=DAILY;COUNT=1'
+                ]
+              };
+
+              var request = gapi.client.calendar.events.insert({
+                'calendarId': 'primary',
+                'resource': event
+              });
+
+              request.execute();
+          });
+
+      }
+
+
+</script>
+
+<script src="https://apis.google.com/js/client.js?onload=checkAuth"></script>
