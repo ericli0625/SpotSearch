@@ -1,10 +1,6 @@
-<script type="text/javascript"
-  src="http://maps.googleapis.com/maps/api/js?sensor=false">
-</script>
-
 <script type="text/javascript">
 
-    function initialize() {
+function initialize() {
 
     //var myLatlng = new google.maps.LatLng(25.04195,121.519028);
 
@@ -24,31 +20,82 @@
 
     var map = new google.maps.Map(document.getElementById("map_canvas"),mapOptions);
     var bounds = new google.maps.LatLngBounds();
-/*
+    /*
     var marker = new google.maps.Marker({
         position: myLatlng,
         map: map,
         title: 'Hello World!'
     });
+    */
+
+    {% for mData in contents %}
+        var lat = "{{mData.latitude}}";
+        var lng = "{{mData.longitude}}";
+        var name = "{{mData.name}}";
+        var category = "{{mData.category}}";
+        var LatLng = new google.maps.LatLng(lat, lng);
+        addSite(map,lat,lng,name,category);
+        bounds.extend(LatLng);
+
+        var request = {
+            location: LatLng,
+            radius: '500',
+            query: "{{mData.name}}"
+        };
+
+        service = new google.maps.places.PlacesService(map);
+        service.textSearch(request, callback);
+
+
+    {% endfor %}
+
+    map.fitBounds(bounds);
+
+}
+
+
+function callback(results, status) {
+  if (status == google.maps.places.PlacesServiceStatus.OK) {
+    for (var i = 0; i < results.length; i++) {
+      var place = results[i];
+      //alert(place.name);
+      var photos = place.photos;
+
+      if (!photos) {
+        return;
+      }
+/*
+var node = document.createElement("LI");                 // Create a <li> node
+var textnode = document.createTextNode(place.name);         // Create a text node
+node.appendChild(textnode);                              // Append the text to <li>
+document.getElementById("myList").appendChild(node);
 */
-
-        {% for mData in contents %}
-            var lat = "{{mData.latitude}}";
-            var lng = "{{mData.longitude}}";
-            var name = "{{mData.name}}";
-            var category = "{{mData.category}}";
-            var LatLng = new google.maps.LatLng(lat, lng);
-            addSite(map,lat,lng,name,category);
-            bounds.extend(LatLng);
-        {% endfor %}
-        map.fitBounds(bounds);
-
+      paserPhoto(photos);
     }
+  }
+}
 
-google.maps.event.addDomListener(window, 'load', initialize);
+
+function paserPhoto(photos){
+
+    for (var i = 0; i < photos.length; i++) {
+        var image = new Image();
+        var image = document.createElement("IMG");
+        //image.src = photos[i].getUrl({'maxWidth': 35,'maxHeight': 35}));
+        image.src = "https://tedcdnpi-a.akamaihd.net/r/tedcdnpf-a.akamaihd.net/images/playlists/in_the_mood_for_love.jpg?ll=1&quality=89&w=256";
+        //alert(image.src);
+        document.getElementById("PhotoList").appendChild(image);
+
+        alert(i);
+    };
+
+}
+
 
 function addSite(map, lat, lng, name, category) {
     var pt = new google.maps.LatLng(lat,lng);
+
+
 
     var marker = new google.maps.Marker({
         position: pt,
@@ -58,6 +105,7 @@ function addSite(map, lat, lng, name, category) {
 
     attachSecretMessage(marker, name, category, lat, lng);
 }
+
 
 var prev_infowindow = null;
 function attachSecretMessage(marker, name,category,lat,lng) {
@@ -69,10 +117,14 @@ function attachSecretMessage(marker, name,category,lat,lng) {
     + "<br />經度：" + lng
   });
   google.maps.event.addListener(marker, 'click', function() {
-    if (prev_infowindow != null) prev_infowindow.close();
+    if (prev_infowindow != null) {
+        prev_infowindow.close();
+    }
     prev_infowindow = infowindow;
     infowindow.open(marker.get('map'), marker);
   });
+  
 }
+
 
 </script>

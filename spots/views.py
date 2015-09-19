@@ -26,7 +26,7 @@ def index(request):
 
     recommend_temp = random.sample(Totalspots.objects.all(),5)
 
-    return render(request,"index.html",{'cities':cities(),'recommend_temp':recommend_temp,'navbar_id':'home'})
+    return render(request,"index.html",{'cities':cities(),'contents':recommend_temp,'navbar_id':'home'})
 
 def aboutinfo(request):
 

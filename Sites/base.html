@@ -14,12 +14,19 @@
 
     <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/bootstrap-datetimepicker.css">
 
+    <style>
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
     <style type="text/css">
       html { height: 100% }
       body { height: 100%; }
     </style>
 
     {% include 'map.html' %}
+    {% include 'map_place.html' %}
     {% include 'googlecalendar.html' %}
 
     <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
@@ -29,6 +36,7 @@
     <script type="text/javascript" src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
 
     <script type="text/javascript" src="{{ STATIC_URL }}js/moment.js"></script>
+
     <script type="text/javascript" src="{{ STATIC_URL }}js/bootstrap-datetimepicker.min.js"></script>
 
 </head>
@@ -41,7 +49,7 @@
 }
 </style>
 
-<body onload="initialize()" >
+<body >
 
 {% include 'narbar.html' %}
 
@@ -58,6 +66,8 @@
     </footer>
 
 </div> <!-- /container -->
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBf5rc8A-VjZG4gAh5o0sH0j-p9lVIEdSc&libraries=places&callback=initialize" async defer></script>
 
 </body>
 </html>
