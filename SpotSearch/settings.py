@@ -1,5 +1,5 @@
 """
-Django settings for Eric project.
+Django settings for SpotSearch project.
 
 For more information on this file, see
 https://docs.djangoproject.com/en/1.6/topics/settings/
@@ -49,9 +49,9 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-ROOT_URLCONF = 'Eric.urls'
+ROOT_URLCONF = 'SpotSearch.urls'
 
-WSGI_APPLICATION = 'Eric.wsgi.application'
+WSGI_APPLICATION = 'SpotSearch.wsgi.application'
 
 
 # Database
