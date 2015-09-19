@@ -1,1 +1,1 @@
-web: gunicorn Eric.wsgi --log-file -
+web: gunicorn SpotSearch.wsgi --log-file -
