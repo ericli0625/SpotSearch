@@ -20,9 +20,14 @@
         margin: 0;
         padding: 0;
       }
-    <style type="text/css">
-      html { height: 100% }
-      body { height: 100%; }
+    </style>
+    <style>
+    #panel_body_style {
+      padding-top:15px;
+      padding-left:50px;
+      padding-right:50px;
+      padding-bottom:15px;
+    }
     </style>
 
     {% include 'map.html' %}
@@ -40,14 +45,6 @@
     <script type="text/javascript" src="{{ STATIC_URL }}js/bootstrap-datetimepicker.min.js"></script>
 
 </head>
-<style>
-#panel_body_style {
-  padding-top:15px;
-  padding-left:50px;
-  padding-right:50px;
-  padding-bottom:15px;
-}
-</style>
 
 <body >
 
