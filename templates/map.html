@@ -76,7 +76,6 @@ function callback(results, status) {
   if (status == google.maps.places.PlacesServiceStatus.OK) {
     for (var i = 0; i < results.length; i++) {
       var place = results[i];
-        //alert(place.name);
         addImageMarker(place);
         //addMarker(place.name,place.geometry.location);
     }
@@ -98,7 +97,7 @@ function addImageMarker(place) {
         map: map,
         position: place.geometry.location,
         title: place.name,
-        icon: photos[0].getUrl({'maxWidth': 35, 'maxHeight': 35})
+        icon: photos[0].getUrl({'maxWidth': 40, 'maxHeight': 40})
     });
 
     attachSecretMessage(marker, place.name, place.geometry.location,photos[0].getUrl({'maxWidth': 200, 'maxHeight': 200}));
@@ -120,13 +119,9 @@ function addMarker(name, latlng) {
 var prev_infowindow = null;
 function attachSecretMessage(marker, name, latlng, photo) {
 
-    var contentString = '<div id="content">'+
-          '<div id="siteNotice">'+
-          '</div>'+
-          '<h4 id="firstHeading" class="firstHeading">'+name+'</h1>'+
-          '<div id="bodyContent">'+
-          '<br />緯經度： '+ latlng.lat() +', '+ latlng.lng() +''+
-          '<br /><img src="'+photo+'"></img>';
+    var contentString =
+          '<h4 class="firstHeading" align="center" >'+name+'</h4>'+
+          '<img src="'+photo+'"></img>';
 
   var infowindow = new google.maps.InfoWindow({
     content:contentString
@@ -139,6 +134,11 @@ function attachSecretMessage(marker, name, latlng, photo) {
     prev_infowindow = infowindow;
     infowindow.open(marker.get('map'), marker);
   });
+
+  google.maps.event.addListener(marker.get('map'), 'click', function() {
+    infowindow.close();
+  });
+
 
 }
 
