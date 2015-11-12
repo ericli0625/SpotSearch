@@ -18,15 +18,39 @@
                 <div class="form-group" >
                     <input type="hidden" name="news_link" type="text" value={{choice.link}}>
                 </div>
-               	<a onclick="$(this).closest('form').submit()" class="list-group-item" >
 
+               	<a onclick="$(this).closest('form').submit()" class="list-group-item" >
 	            	<p><h4>{{choice.title}}</h4></p>
                 <p align="center">{{choice.cite}}</p>
+                </a>
 
-
-	            </a>
-            </form>
+          </form>
 			{% endfor %}
+
+      <nav>
+        <ul class="pagination">
+            <li>
+            {% if dataFiled.has_previous %}
+            <a href="?page={{ dataFiled.previous_page_number }}#01" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+            {% endif %}
+            </a>
+            </li>
+
+            {% for item in pageSize %}
+              <li><a href="?page={{ forloop.counter }}#01">{{forloop.counter}}</a></li>
+            {% endfor %}
+
+            <li>
+            {% if dataFiled.has_next %}
+            <a href="?page={{ dataFiled.next_page_number }}#01" aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+            </a>
+            {% endif %}
+            </li>
+        </ul>
+      </nav>
+
         </div>
 
  		</div><!-- /.row -->

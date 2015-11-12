@@ -5,6 +5,7 @@ import random
 from spots.models import Book ,Totalspots , Cities
 from bs4 import BeautifulSoup
 import urllib
+from django.core.paginator import Paginator , EmptyPage, PageNotAnInteger
 
 def cities():
 
@@ -126,4 +127,25 @@ def news(request):
     for x in xrange(1,len(list_title)):
         list_total.append(News(list_title[x],list_cite[x],list_link[x]))
 
-    return render(request,"news.html",{'cities':cities(),'dataFiled':list_total,'navbar_id':'news'})
+    page = request.GET.get('page')
+    list_total_data = pagination(list_total,page,request)
+
+    pagesize = (1,2,3,4,5)
+
+    page = request.GET.get('page')
+
+    return render(request,"news.html",{'cities':cities(),'dataFiled':list_total_data,'pageSize':pagesize,'navbar_id':'news'})
+
+def pagination(list_total,page,request):
+    paginator = Paginator(list_total,5);
+
+    try:
+        list_total = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        list_total = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        list_total = paginator.page(paginator.num_pages)
+
+    return list_total
