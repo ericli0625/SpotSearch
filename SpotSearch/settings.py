@@ -58,7 +58,7 @@ WSGI_APPLICATION = 'SpotSearch.wsgi.application'
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
 
 import dj_database_url
-DATABASES = {'default': dj_database_url.config(default='postgres://qiivcofeurbrrq:ZrHRbAnPUaJTKo3lhyGCEKMMlI@ec2-54-83-204-104.compute-1.amazonaws.com:5432/d5sloc17vjd4sd')}
+DATABASES = {'default': dj_database_url.config(default='postgres://lykjvmgesxmjiz:ca8bf496d88f2b21fc5399b1538bd5ddaa312cf228580405a8cca53efe2a5339@ec2-50-17-234-234.compute-1.amazonaws.com:5432/dd658edhb57rgb')}
 
 
 #DATABASES = {
